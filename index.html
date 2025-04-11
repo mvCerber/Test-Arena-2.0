@@ -1,20 +1,68 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>Duel Arena</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #e0e0e0;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #00ffcc;
+    }
+    .btn {
+      background-color: #1a1a1a;
+      color: #00ffcc;
+      border: 2px solid #00ffcc;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn:hover {
+      background-color: #00ffcc;
+      color: #1a1a1a;
+    }
+    .status-box {
+      margin-top: 30px;
+      padding: 20px;
+      border: 1px solid #444;
+      background-color: #1a1a1a;
+      display: inline-block;
+      text-align: left;
+    }
+    .label {
+      font-weight: bold;
+      color: #cccccc;
+    }
+    .value {
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body>
   <h1>Duel Arena (BNB Testnet)</h1>
-  <button onclick="connectWallet()">Connect Wallet</button>
+  <button class="btn" onclick="connectWallet()">Connect Wallet</button>
+  <button class="btn" onclick="connectWithQR()">WalletConnect QR</button>
   <br><br>
-  <button onclick="joinAsPlayer1()">Join as Player 1 (0.02 BNB)</button>
-  <button onclick="joinAsPlayer2()">Join as Player 2 (0.02 BNB)</button>
-  <br><br>
-  <div id="status"></div>
+  <button class="btn" onclick="joinAsPlayer1()">Join as Player 1 (0.02 BNB)</button>
+  <button class="btn" onclick="joinAsPlayer2()">Join as Player 2 (0.02 BNB)</button>
+  <button class="btn" onclick="resetDuel()">Reset Duel</button>
 
-  <!-- ОБОВʼЯЗКОВО ця UMD-версія -->
+  <div class="status-box">
+    <div><span class="label">Player 1:</span> <span id="player1" class="value">-</span></div>
+    <div><span class="label">Player 2:</span> <span id="player2" class="value">-</span></div>
+    <div><span class="label">Winner:</span> <span id="winner" class="value">-</span></div>
+    <div><span class="label">State:</span> <span id="state" class="value">-</span></div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
   <script src="duel-arena.js"></script>
 </body>
 </html>
