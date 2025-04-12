@@ -1,50 +1,61 @@
+import { ethers } from "./ethers.min.js";
+import abi from "./duel-arena-abi.js";
+
+const contractAddress = "0x898D5b5F5ef690959dF87399972Db66308D3c02D";
+const betAmount = ethers.utils.parseEther("0.02");
 
 let provider;
 let signer;
 let contract;
-
-const CONTRACT_ADDRESS = "0x898D5b5F5ef690959dF87399972Db66308D3c02D";
-const ABI = [ /* Встав сюди ABI контракту */ ];
+let userAddress;
 
 async function connectWallet() {
-    if (window.ethereum) {
-        provider = new ethers.providers.Web3Provider(window.ethereum);
-        await provider.send("eth_requestAccounts", []);
-        signer = provider.getSigner();
-        contract = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
-        updateStatus();
-    } else {
-        alert("Please install MetaMask.");
+    if (!window.ethereum) {
+        alert("MetaMask not detected!");
+        return;
     }
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send("eth_requestAccounts", []);
+    signer = provider.getSigner();
+    userAddress = await signer.getAddress();
+    contract = new ethers.Contract(contractAddress, abi, signer);
+    updateStatus();
+    document.getElementById("walletStatus").innerText = "Wallet connected";
 }
 
 async function joinAsPlayer1() {
+    if (!contract) return;
     try {
-        const tx = await contract.joinAsPlayer1({ value: ethers.utils.parseEther("0.02") });
+        const tx = await contract.joinAsPlayer1({ value: betAmount });
         await tx.wait();
         updateStatus();
     } catch (err) {
-        console.error("Join as Player 1 error:", err);
+        alert("Error joining as Player 1: " + err.message);
+        console.error(err);
     }
 }
 
 async function joinAsPlayer2() {
+    if (!contract) return;
     try {
-        const tx = await contract.joinAsPlayer2({ value: ethers.utils.parseEther("0.02") });
+        const tx = await contract.joinAsPlayer2({ value: betAmount });
         await tx.wait();
         updateStatus();
     } catch (err) {
-        console.error("Join as Player 2 error:", err);
+        alert("Error joining as Player 2: " + err.message);
+        console.error(err);
     }
 }
 
 async function resetDuel() {
+    if (!contract) return;
     try {
         const tx = await contract.reset();
         await tx.wait();
         updateStatus();
     } catch (err) {
-        console.error("Reset error:", err);
+        alert("Error resetting duel: " + err.message);
+        console.error(err);
     }
 }
 
@@ -56,13 +67,20 @@ async function updateStatus() {
         const winner = await contract.winner();
         const state = await contract.state();
 
-        document.getElementById("status").innerHTML = `
-            <p>Player 1: ${player1}</p>
-            <p>Player 2: ${player2}</p>
-            <p>Winner: ${winner}</p>
-            <p>State: ${state}</p>
-        `;
+        if (document.getElementById("player1")) document.getElementById("player1").innerText = "Player 1: " + player1;
+        if (document.getElementById("player2")) document.getElementById("player2").innerText = "Player 2: " + player2;
+        if (document.getElementById("winner")) document.getElementById("winner").innerText = "Winner: " + winner;
+        if (document.getElementById("state")) {
+            const states = ["WaitingForPlayer1", "WaitingForPlayer2", "InProgress", "Finished"];
+            document.getElementById("state").innerText = "State: " + states[state];
+        }
     } catch (err) {
-        console.error("Status update failed:", err);
+        console.error("Failed to update status:", err);
     }
 }
+
+// Attach to window for button usage
+window.connectWallet = connectWallet;
+window.joinAsPlayer1 = joinAsPlayer1;
+window.joinAsPlayer2 = joinAsPlayer2;
+window.resetDuel = resetDuel;

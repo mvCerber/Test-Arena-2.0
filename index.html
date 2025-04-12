@@ -1,53 +1,63 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Duel Arena (BNB Testnet)</title>
-    <style>
-        body {
-            background-color: black;
-            color: #00FF00;
-            font-family: monospace;
-            text-align: center;
-            padding: 20px;
-        }
-        button {
-            background-color: black;
-            color: #00FF00;
-            border: 2px solid #00FF00;
-            padding: 10px 20px;
-            margin: 10px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #00FF00;
-            color: black;
-        }
-        .status-box {
-            border: 2px solid #00FF00;
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px;
-            text-align: left;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Duel Arena (BNB Testnet)</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff99;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    button {
+      margin: 8px;
+      padding: 12px 20px;
+      background-color: #000;
+      color: #00ff99;
+      border: 2px solid #00ff99;
+      font-family: monospace;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #00ff99;
+      color: #000;
+    }
+    #status {
+      margin-top: 30px;
+      padding: 16px;
+      border: 1px solid #00ff99;
+      min-width: 300px;
+      text-align: left;
+    }
+  </style>
 </head>
 <body>
-    <h1>Duel Arena (BNB Testnet)</h1>
-    <button onclick="connectWallet()">Connect Wallet</button>
-    <button onclick="joinAsPlayer1()">Join as Player 1 (0.02 BNB)</button>
-    <button onclick="joinAsPlayer2()">Join as Player 2 (0.02 BNB)</button>
-    <br>
-    <button onclick="resetDuel()">Reset Duel</button>
-    <div class="status-box" id="status">
-        <p>Player 1: -</p>
-        <p>Player 2: -</p>
-        <p>Winner: -</p>
-        <p>State: -</p>
-    </div>
+  <h1>Duel Arena (BNB Testnet)</h1>
+  <button onclick="connectWallet()">Connect Wallet</button>
+  <button onclick="joinAsPlayer1()">Join as Player 1 (0.02 BNB)</button>
+  <button onclick="joinAsPlayer2()">Join as Player 2 (0.02 BNB)</button>
+  <button onclick="resetDuel()">Reset Duel</button>
 
-    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-    <script src="final_duel-arena.js"></script>
+  <div id="status">
+    <p>Player 1: -</p>
+    <p>Player 2: -</p>
+    <p>Winner: -</p>
+    <p>State: -</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script src="duel-arena.js"></script>
 </body>
 </html>
