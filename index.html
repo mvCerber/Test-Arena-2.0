@@ -1,42 +1,48 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Duel Arena (BNB Testnet)</title>
+    <title>NFT Battle Arena</title>
     <style>
         body {
-            background-color: #000;
-            color: #00ffcc;
-            font-family: monospace;
+            margin: 0;
+            padding: 0;
+            background: url('A_2D_digital_illustration_promotional_interface_fe.png') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
             text-align: center;
-            padding: 30px;
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
-        button {
-            background-color: #00ffcc;
-            border: none;
-            padding: 10px 20px;
+        .btn {
+            display: inline-block;
             margin: 10px;
-            cursor: pointer;
+            padding: 12px 25px;
+            font-size: 18px;
             font-weight: bold;
+            color: #fff;
+            background-color: #1c1c1c;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: 0.3s;
         }
-        #status {
-            margin-top: 20px;
-            white-space: pre-wrap;
+        .btn:hover {
+            background-color: #fff;
+            color: #1c1c1c;
         }
     </style>
 </head>
 <body>
-    <h1>Duel Arena (BNB Testnet)</h1>
-    <button onclick="connectWallet()">Connect Wallet</button>
-    <br><br>
-    <button onclick="joinAsPlayer1()">Join as Player 1 (0.02 BNB)</button>
-    <button onclick="joinAsPlayer2()">Join as Player 2 (0.02 BNB)</button>
-    <br><br>
-    <button onclick="resetDuel()">Reset Duel</button>
-    <div id="status"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-    <script src="duel-arena.js"></script>
+    <div class="container">
+        <a href="https://t.me/NFTBattleArena" class="btn">Join Telegram</a>
+        <a href="duel.html" class="btn">Go to Duel</a>
+        <a href="backstage.html" class="btn">Backstage</a>
+    </div>
 </body>
 </html>
