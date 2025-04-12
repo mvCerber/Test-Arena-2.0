@@ -2,47 +2,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>NFT Battle Arena</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: url('A_2D_digital_illustration_promotional_interface_fe.png') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Arial', sans-serif;
-        }
-        .container {
-            text-align: center;
-            position: absolute;
-            top: 65%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 25px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #1c1c1c;
-            border: 2px solid #fff;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .btn:hover {
-            background-color: #fff;
-            color: #1c1c1c;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Duel Arena (BNB Testnet)</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ffcc;
+      font-family: monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #00ffcc;
+    }
+
+    button {
+      background-color: transparent;
+      border: 2px solid #00ffcc;
+      color: #00ffcc;
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00ffcc;
+      color: #000;
+    }
+
+    #status {
+      margin-top: 20px;
+      font-size: 14px;
+      white-space: pre-line;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <a href="https://t.me/NFTBattleArena" class="btn">Join Telegram</a>
-        <a href="duel.html" class="btn">Go to Duel</a>
-        <a href="backstage.html" class="btn">Backstage</a>
-    </div>
+  <h1>Duel Arena (BNB Testnet)</h1>
+  <div class="button-row">
+    <button onclick="connectWallet()">Connect Wallet</button>
+    <button onclick="connectWalletQR()">WalletConnect QR</button>
+    <button onclick="openInMetaMask()">Open in MetaMask</button>
+  </div>
+  <br/>
+  <div class="button-row">
+    <button onclick="joinAsPlayer1()">Join as Player 1 (0.02 BNB)</button>
+    <button onclick="joinAsPlayer2()">Join as Player 2 (0.02 BNB)</button>
+    <button onclick="resetDuel()">Reset Duel</button>
+  </div>
+  <div id="status">Wallet not connected</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script src="https://unpkg.com/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
+  <script src="duel-arena.js"></script>
 </body>
 </html>
