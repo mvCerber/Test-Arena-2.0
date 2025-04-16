@@ -48,7 +48,6 @@ async function joinAsPlayer2() {
     try {
         if (!connectedAccount) {
             await connectWallet(); // Підключення гаманця, якщо не підключений
-        }
         await joinAsPlayer2();     // Вхід у контракт
     } catch (error) {
         alert("Join as Player 2 failed:\n" + error.message);
