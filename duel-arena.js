@@ -44,13 +44,16 @@ async function joinAsPlayer2() {
       return;
     }
 
-    const tx = await contract.joinAsPlayer2({ value: ethers.utils.parseEther("0.02") });
-    await tx.wait();
-    updateStatus();
-  } catch (error) {
-    alert("Join as Player 2 failed: " + error.message);
-    console.error(error);
-  }
+    async function handleJoinAsPlayer2() {
+    try {
+        if (!connectedAccount) {
+            await connectWallet(); // Підключення гаманця, якщо не підключений
+        }
+        await joinAsPlayer2();     // Вхід у контракт
+    } catch (error) {
+        alert("Join as Player 2 failed:\n" + error.message);
+        console.error(error);
+    }
 }
 
 async function resetDuel() {
